@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مبادرة تعريف برامج الدعم والحوافز — KACST</title>
+<style>
+/* ══════════════════════════════════════════════
+   CSS VARIABLES — controlled from settings sheet
+   ══════════════════════════════════════════════ */
+:root{
+  --primary:        #1a3a6b;
+  --secondary:      #0e7c4a;
+  --accent:         #b06f00;
+  --bg:             #f2f4f7;
+  --text:           #374151;
+  --card-radius:    12px;
+  --font:           system-ui, sans-serif;
+  --shadow:         0 2px 8px rgba(26,58,107,0.06);
+  --border:         #dde4f0;
+  --text-muted:     #6b7a99;
+  --text-light:     #9aaac4;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--primary);direction:rtl;min-height:100vh}
+
+/* ── HEADER ── */
+.header{
+  background:var(--primary);
+  padding:18px 28px 14px;
+  display:flex;align-items:center;gap:18px;
+}
+.kacst-logo-wrap{flex-shrink:0;display:flex;align-items:center;gap:10px}
+.kacst-wordmark{display:flex;flex-direction:column;justify-content:center}
+.kacst-name-ar{font-size:11px;font-weight:700;color:#fff;line-height:1.3;white-space:nowrap}
+.kacst-name-en{font-size:9px;color:rgba(255,255,255,0.55);margin-top:1px;white-space:nowrap;letter-spacing:.02em}
+.hdiv{width:1px;height:42px;background:rgba(255,255,255,0.2);flex-shrink:0;margin:0 6px}
+.htitles{flex:1}
+.h-initiative{font-size:14px;font-weight:700;color:#fff;line-height:1.4}
+.h-dept{font-size:10px;color:rgba(255,255,255,0.6);margin-top:2px}
+.h-meta{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+
+/* ── UPDATE BUTTON ── */
+.btn-update{
+  background:rgba(255,255,255,0.12);
+  border:1.5px solid rgba(255,255,255,0.25);
+  color:#fff;
+  font-family:var(--font);
+  font-size:11px;font-weight:600;
+  padding:7px 15px;border-radius:8px;
+  cursor:pointer;white-space:nowrap;
+  transition:all .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.btn-update:hover{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.45)}
+.btn-update.loading{opacity:.6;cursor:default}
+.btn-update .spin{display:inline-block;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MAIN ── */
+.main{max-width:1080px;margin:0 auto;padding:20px 16px}
+
+/* ── KPI ROW (stats) ── */
+.kpis-row{
+  display:flex;align-items:stretch;
+  background:#fff;border-radius:14px;
+  border:1px solid var(--border);
+  overflow:hidden;margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+.kpi-item{flex:1;text-align:center;padding:18px 8px}
+.kpi-item .n{font-size:34px;font-weight:700;line-height:1;color:var(--primary)}
+.kpi-item .l{font-size:11px;color:var(--text-muted);margin-top:5px;line-height:1.4}
+.ksep{width:1px;background:var(--border);margin:14px 0}
+
+/* ── TABS ── */
+.tabs-bar{
+  display:flex;gap:8px;
+  background:transparent;
+  padding:0;margin-bottom:20px;
+}
+.tab-btn{
+  padding:8px 22px;border-radius:9px;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  cursor:pointer;
+  background:rgba(255,255,255,0.55);
+  border:1.5px solid var(--border);
+  color:var(--text-muted);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  box-shadow:0 1px 4px rgba(26,58,107,0.05);
+  transition:all .18s;
+  letter-spacing:.01em;
+}
+.tab-btn.active{
+  background:#fff;
+  border-color:var(--primary);
+  color:var(--primary);
+  box-shadow:0 2px 10px rgba(26,58,107,0.10);
+}
+.tab-btn:hover:not(.active){
+  background:rgba(255,255,255,0.8);
+  border-color:#c5d0e6;
+  color:var(--primary);
+}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── SECTION TITLE ── */
+.sec-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-hdr .bar{width:4px;height:16px;border-radius:2px;flex-shrink:0}
+.sec-hdr .bar.blue{background:var(--primary)}
+.sec-hdr .bar.green{background:var(--secondary)}
+.sec-hdr .bar.amber{background:var(--accent)}
+.sec-hdr h2{font-size:12px;font-weight:700;color:var(--primary)}
+
+/* ── NABTHA (about text box) ── */
+.nabtha-box{
+  background:#fff;border:1px solid var(--border);border-radius:var(--card-radius);
+  padding:18px 20px;margin-bottom:20px;
+  box-shadow:var(--shadow);
+  font-size:13px;color:var(--text);line-height:1.8;
+}
+.nabtha-box p{margin-bottom:10px}
+.nabtha-box p:last-child{margin-bottom:0}
+
+/* ── OBJECTIVES ── */
+.objectives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.obj-card{
+  background:#fff;border:1px solid var(--border);border-radius:11px;
+  padding:12px 14px;display:flex;align-items:flex-start;gap:10px;
+  box-shadow:0 1px 3px rgba(26,58,107,0.04);
+}
+.obj-num{
+  width:24px;height:24px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+}
+.obj-num.c1{background:var(--primary)}
+.obj-num.c2{background:var(--secondary)}
+.obj-num.c3{background:#1a6b8a}
+.obj-num.c4{background:#6b4f1a}
+.obj-num.c5{background:#6b1a1a}
+.obj-num.c6{background:#4a1a6b}
+.obj-text{font-size:11px;color:var(--text);line-height:1.5}
+
+/* ── KPI INDICATORS ── */
+.kpi-indicators{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.kpi-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--card-radius);
+  padding:13px 14px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 1px 3px rgba(26,58,107,0.04);
+}
+.kpi-badge{
+  font-size:10px;font-weight:700;color:#fff;
+  border-radius:7px;padding:3px 8px;white-space:nowrap;flex-shrink:0;
+}
+.kpi-badge.b1{background:var(--primary)}
+.kpi-badge.b2{background:var(--secondary)}
+.kpi-badge.b3{background:#1a6b8a}
+.kpi-badge.b4{background:#3d308e}
+.kpi-lbl{flex:1;font-size:11px;color:var(--text);line-height:1.5}
+.kpi-vals{display:flex;gap:7px;flex-shrink:0}
+.val-box{text-align:center;border-radius:8px;padding:6px 12px;min-width:62px}
+.val-box .vn{font-size:17px;font-weight:700;line-height:1}
+.val-box .vl{font-size:9px;margin-top:2px;opacity:.7}
+.val-box.current{background:#eef2f9;border:1px solid var(--border)}
+.val-box.current .vn{color:var(--primary)}
+.val-box.current .vl{color:var(--text-muted)}
+.val-box.target-b1{background:#e8f0fa;border:1px solid #c5d5ee}
+.val-box.target-b1 .vn{color:var(--primary)}
+.val-box.target-b1 .vl{color:#5a7aaa}
+.val-box.target-b2{background:#e8f5ee;border:1px solid #b5dec9}
+.val-box.target-b2 .vn{color:var(--secondary)}
+.val-box.target-b2 .vl{color:#3a9e6e}
+.val-box.target-b3{background:#e8f3f8;border:1px solid #b5d5e5}
+.val-box.target-b3 .vn{color:#1a6b8a}
+.val-box.target-b3 .vl{color:#3a8baa}
+.val-box.target-b4{background:#d3d1e693;border:1px solid #d2cfe1}
+.val-box.target-b4 .vn{color:#3d308e}
+.val-box.target-b4 .vl{color:#817bac}
+
+/* ── ENTITIES ── */
+.entities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.entity-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--card-radius);
+  padding:14px 15px;cursor:pointer;
+  transition:all .18s;position:relative;
+  box-shadow:0 1px 4px rgba(26,58,107,0.04);
+}
+.entity-card:hover{box-shadow:0 4px 16px rgba(26,58,107,0.12);transform:translateY(-1px)}
+.entity-card.active,.entity-card.gov-open{border-color:var(--primary);background:#f0f4fa}
+.entity-card .stripe{position:absolute;right:0;top:0;bottom:0;width:4px;border-radius:0 12px 12px 0}
+.e-type{font-size:9px;color:var(--text-light);margin-bottom:4px;letter-spacing:.04em}
+.e-name{font-size:13px;font-weight:700;color:var(--primary);line-height:1.4}
+.e-badge{
+  font-size:9px;color:#fff;border-radius:20px;padding:2px 8px;
+  position:absolute;top:11px;left:11px;font-weight:600;
+}
+.e-arrow{font-size:11px;color:var(--text-light);position:absolute;bottom:11px;left:11px;transition:transform .2s}
+.entity-card.gov-open .e-arrow{transform:rotate(90deg);color:var(--primary)}
+
+/* stripe & badge colors */
+.gov-style  .stripe{background:var(--primary)} .gov-style  .e-badge{background:var(--primary)}
+.sdb-style  .stripe{background:#0a6640}        .sdb-style  .e-badge{background:#0a6640}
+.uni-style  .stripe{background:#ce932d}        .uni-style  .e-badge{background:#ce932d}
+.np-style   .stripe{background:#1a6b8a}        .np-style   .e-badge{background:#1a6b8a}
+.prv-style  .stripe{background:#8b2727}        .prv-style  .e-badge{background:#8b2727}
+.hlth-style .stripe{background:var(--secondary)}.hlth-style .e-badge{background:var(--secondary)}
+.glb-style  .stripe{background:#4a1a6b}        .glb-style  .e-badge{background:#4a1a6b}
+
+/* ── GOV SUB ── */
+.gov-sub{
+  display:none;grid-column:1/-1;
+  background:#f4f7fb;border:1.5px solid var(--border);
+  border-radius:var(--card-radius);padding:14px;
+}
+.gov-sub.show{display:block}
+.gov-sub-lbl{font-size:11px;font-weight:700;color:var(--primary);margin-bottom:10px}
+.gov-sub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sub-btn{
+  background:#fff;border:1.5px solid var(--border);border-radius:10px;
+  padding:10px 12px;cursor:pointer;font-family:var(--font);
+  text-align:right;transition:all .15s;width:100%;
+}
+.sub-btn:hover,.sub-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.sb-name{font-size:11px;font-weight:700;display:block;margin-bottom:2px;color:inherit}
+.sb-sub{font-size:9px;color:var(--text-light);display:block}
+.sub-btn.active .sb-sub,.sub-btn:hover .sb-sub{color:rgba(255,255,255,0.6)}
+
+/* ── PROGRAMS ── */
+.prog-wrap{margin-bottom:24px;display:none}
+.prog-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.prog-hdr-title{font-size:13px;font-weight:700;color:var(--primary)}
+.prog-hdr-count{font-size:11px;color:var(--text-light)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+
+.pc{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--card-radius);
+  padding:13px 15px;cursor:default;
+  transition:all .15s;position:relative;
+  box-shadow:0 1px 4px rgba(26,58,107,0.04);
+}
+.pc:hover{box-shadow:0 4px 14px rgba(26,58,107,0.1)}
+.pc .pc-stripe{position:absolute;right:0;top:0;bottom:0;width:4px;border-radius:0 12px 12px 0}
+.pc.nw .pc-stripe{background:var(--secondary)}
+.pc.cl .pc-stripe{background:#aaa;opacity:.5}
+.pc:not(.nw):not(.cl) .pc-stripe{background:var(--border)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.psrc{font-size:10px;color:var(--text-light)}
+.plink{
+  font-size:10px;color:var(--primary);text-decoration:none;
+  background:#eef2f9;padding:2px 8px;border-radius:10px;
+  white-space:nowrap;transition:all .15s;
+}
+.plink:hover{background:var(--primary);color:#fff}
+.pname{font-size:12.5px;font-weight:700;color:var(--primary);margin-bottom:7px;line-height:1.4;cursor:pointer}
+.pname:hover{text-decoration:underline}
+.ptags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.tf{background:#e8f0fa;color:var(--primary)}
+.tn{background:#f5f5f5;border:1px solid var(--border);color:var(--text-light)}
+.tc{background:#f0f0f0;color:#999}
+.tnw{background:#e8f5ee;color:var(--secondary);border:1px solid #b5dec9}
+
+/* ── DETAIL ── */
+.det{
+  background:#fff;border:2px solid var(--primary);border-radius:14px;
+  padding:18px 20px;margin-bottom:14px;display:none;
+  box-shadow:0 4px 20px rgba(26,58,107,0.1);
+}
+.det.show{display:block}
+.det-title{
+  font-size:14px;font-weight:700;color:var(--primary);
+  margin-bottom:12px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.det-link{
+  font-size:11px;color:#fff;background:var(--primary);
+  padding:4px 13px;border-radius:8px;text-decoration:none;white-space:nowrap;
+}
+.det-link:hover{opacity:.85}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.di label{font-size:10px;color:var(--text-light);display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.di p{font-size:11.5px;color:var(--primary);line-height:1.6}
+.cbtn{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:6px 16px;font-size:12px;cursor:pointer;font-family:var(--font)}
+
+/* ── LOADING STATE ── */
+.loading-overlay{
+  text-align:center;padding:30px;color:var(--text-muted);font-size:12px;
+}
+.skeleton{
+  background:linear-gradient(90deg,#e8ecf3 25%,#f3f5f9 50%,#e8ecf3 75%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;
+  border-radius:6px;
+}
+@keyframes shimmer{to{background-position:-200% 0}}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  font-size:10px;color:var(--text-muted);
+  margin-bottom:14px;display:flex;align-items:center;gap:6px;
+}
+.status-dot{
+  width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;
+}
+.status-dot.live{background:#22c55e}
+.status-dot.fallback{background:#f59e0b}
+.status-dot.error{background:#ef4444}
+
+@media(max-width:700px){
+  .objectives-grid,.entities-grid{grid-template-columns:1fr 1fr}
+  .gov-sub-grid{grid-template-columns:1fr 1fr}
+  .kpi-indicators{grid-template-columns:1fr 1fr}
+  .kpis-row{flex-wrap:wrap}
+  .ksep{display:none}
+  .header{flex-wrap:wrap}
+  .hdiv{display:none}
+  .dgrid{grid-template-columns:1fr}
+  .kpi-card{flex-wrap:wrap}
+  .kpi-vals{margin-top:8px;width:100%}
+  .btn-update{font-size:10px;padding:6px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="kacst-logo-wrap">
+    <img
+      id="kacst-logo"
+      src="https://i0.wp.com/ksalogo.com/wp-content/uploads/2025/05/KACST-01-1.png?fit=1000%2C1000&ssl=1"
+      alt="KACST"
+      style="height:56px;width:56px;object-fit:contain;flex-shrink:0;filter:brightness(0) invert(1);"
+    />
+    <div class="kacst-wordmark">
+      <div class="kacst-name-ar">مدينة الملك عبدالعزيز للعلوم والتقنية</div>
+      <div class="kacst-name-en">King Abdulaziz City for Science and Technology</div>
+    </div>
+  </div>
+  <div class="hdiv"></div>
+  <div class="htitles">
+    <div class="h-initiative" id="h-initiative">مبادرة تعريف برامج الدعم والحوافز المالية لرواد الأعمال</div>
+    <div class="h-dept" id="h-dept">الإدارة العامة لتمويل الابتكار · <a href="/cdn-cgi/l/email-protection#443222312a20042f252737306a232b326a3725" style="color:rgba(255,255,255,0.6);text-decoration:none;"><span class="__cf_email__" data-cfemail="a0d6c6d5cec4e0cbc1c3d3d48ec7cfd68ed3c1">[email&#160;protected]</span></a></div>
+    <div class="h-meta" id="h-meta">آخر تحديث: جارٍ التحميل…</div>
+  </div>
+  <button class="btn-update" id="btn-update" onclick="refreshAll()">
+    <span id="btn-icon">↻</span>
+    <span id="btn-text">تحديث البيانات</span>
+  </button>
+</div>
+
+<div class="main">
+
+  <!-- ═══ STATS KPI ROW ═══ -->
+  <div class="kpis-row" id="stats-row">
+    <div class="kpi-item"><div class="n" id="stat-n1">22</div><div class="l" id="stat-l1">جهة داعمة</div></div>
+    <div class="ksep"></div>
+    <div class="kpi-item"><div class="n" id="stat-n2">80+</div><div class="l" id="stat-l2">برنامج ومبادرة</div></div>
+    <div class="ksep"></div>
+    <div class="kpi-item"><div class="n" id="stat-n3">3M</div><div class="l" id="stat-l3">تمويل حكومي يصل الى</div></div>
+    <div class="ksep"></div>
+    <div class="kpi-item"><div class="n" id="stat-n4">150K</div><div class="l" id="stat-l4">تمويل خاص يصل الى</div></div>
+  </div>
+
+  <!-- ═══ STATUS BAR ═══ -->
+  <div class="status-bar" id="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-msg">جارٍ تحميل البيانات من Google Sheets…</span>
+  </div>
+
+  <!-- ═══ TABS BAR ═══ -->
+  <div class="tabs-bar">
+    <button class="tab-btn active" id="tab-btn-about"   onclick="switchTab('about')">حول</button>
+    <button class="tab-btn"        id="tab-btn-programs" onclick="switchTab('programs')">البرامج</button>
+  </div>
+
+  <!-- ════════════════════════════════
+       TAB 1 : حول
+       ════════════════════════════════ -->
+  <div class="tab-panel active" id="tab-about">
+
+    <!-- نبذة عن المبادرة -->
+    <div class="sec-hdr"><div class="bar blue"></div><h2>نبذة عن المبادرة</h2></div>
+    <div class="nabtha-box" id="nabtha-box">
+      <p>تُعنى هذه المبادرة بحصر وتعريف برامج الدعم والحوافز المالية المتاحة لرواد الأعمال والشركات الناشئة في المملكة العربية السعودية، وتيسير وصولهم إلى هذه الفرص من خلال دليل شامل وموحّد.</p>
+    </div>
+
+    <!-- أهداف المبادرة -->
+    <div class="sec-hdr"><div class="bar blue"></div><h2>أهداف المبادرة</h2></div>
+    <div class="objectives-grid" id="objectives-grid">
+      <div class="obj-card"><div class="obj-num c1">1</div><div class="obj-text">توفير قاعدة بيانات شاملة عن الجهات الداعمة للباحثين عن فرص الدعم</div></div>
+      <div class="obj-card"><div class="obj-num c2">2</div><div class="obj-text">رفع الوعي بفرص الدعم المتاحة لرواد الأعمال والشركات الناشئة</div></div>
+      <div class="obj-card"><div class="obj-num c3">3</div><div class="obj-text">توجيه رواد الأعمال نحو المسارات والبرامج المناسبة لمراحل مشاريعهم</div></div>
+      <div class="obj-card"><div class="obj-num c4">4</div><div class="obj-text">تمكين المبتكرين من الوصول الفعّال إلى مصادر التمويل والدعم</div></div>
+      <div class="obj-card"><div class="obj-num c5">5</div><div class="obj-text">تحقيق نمو مستدام وقابل للتوسع للشركات الناشئة السعودية</div></div>
+      <div class="obj-card"><div class="obj-num c6">6</div><div class="obj-text">رفع فرص نجاح الشركات الناشئة وزيادة حصولها على القبول بالبرامج</div></div>
+    </div>
+
+    <!-- مؤشرات الأداء -->
+    <div class="sec-hdr"><div class="bar green"></div><h2>مؤشرات الأداء</h2></div>
+    <div class="kpi-indicators" id="kpi-indicators">
+      <div class="kpi-card">
+        <div class="kpi-badge b1">01</div>
+        <div class="kpi-lbl">حصر وتعريف برامج الحوافز/المنح الوطنية الحكومية والخاصة</div>
+        <div class="kpi-vals">
+          <div class="val-box current"><div class="vn">82</div><div class="vl">الحالي</div></div>
+          <div class="val-box target-b1"><div class="vn">90</div><div class="vl">المستهدف</div></div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-badge b2">02</div>
+        <div class="kpi-lbl">تسهيل تقديم الشركات الناشئة للحصول على الحوافز والمنح</div>
+        <div class="kpi-vals">
+          <div class="val-box current"><div class="vn">4</div><div class="vl">الحالي</div></div>
+          <div class="val-box target-b2"><div class="vn">25</div><div class="vl">المستهدف</div></div>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-badge b3">03</div>
+        <div class="kpi-lbl">إقامة تعاون فعّال مع الجهات المقدِّمة لبرامج الحوافز والمنح</div>
+        <div class="kpi-vals">
+          <div class="val-box current"><div class="vn">5</div><div class="vl">الحالي</div></div>
+          <div class="val-box target-b3"><div class="vn">15</div><div class="vl">المستهدف</div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-about -->
+
+  <!-- ════════════════════════════════
+       TAB 2 : البرامج
+       ════════════════════════════════ -->
+  <div class="tab-panel" id="tab-programs">
+
+    <!-- ═══ ENTITIES ═══ -->
+    <div class="sec-hdr"><div class="bar amber"></div><h2>الجهات الداعمة</h2></div>
+    <div class="entities-grid" id="entities-grid">
+
+      <div class="entity-card gov-style" id="gov-card" onclick="toggleGov(this)">
+        <div class="stripe"></div>
+        <div class="e-type">حكومية</div>
+        <div class="e-name">الجهات الحكومية</div>
+        <span class="e-badge" id="gov-badge">9 جهات</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+      <div class="entity-card uni-style" onclick="selectCat('universities','الجامعات',this)">
+        <div class="stripe"></div>
+        <div class="e-type">أكاديمية</div>
+        <div class="e-name">الجامعات</div>
+        <span class="e-badge" id="badge-universities">6 برامج</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+      <div class="entity-card np-style" onclick="selectCat('nonprofit','المؤسسات غير الربحية',this)">
+        <div class="stripe"></div>
+        <div class="e-type">مجتمعية</div>
+        <div class="e-name">المؤسسات غير الربحية</div>
+        <span class="e-badge" id="badge-nonprofit">4 برامج</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+      <!-- GOV SUB PANEL -->
+      <div class="gov-sub" id="gov-sub">
+        <div class="gov-sub-lbl">اختر الجهة الحكومية</div>
+        <div class="gov-sub-grid" id="gov-sub-grid">
+          <button class="sub-btn" onclick="selectGov('ntdp','NTDP',this)"><span class="sb-name">NTDP</span><span class="sb-sub">البرنامج الوطني لتنمية التقنية</span></button>
+          <button class="sub-btn" onclick="selectGov('industry','وزارة الصناعة',this)"><span class="sb-name">وزارة الصناعة</span><span class="sb-sub">وزارة الصناعة والثروة المعدنية</span></button>
+          <button class="sub-btn" onclick="selectGov('smebank','بنك المنشآت',this)"><span class="sb-name">بنك المنشآت</span><span class="sb-sub">بنك المنشآت الصغيرة والمتوسطة</span></button>
+          <button class="sub-btn" onclick="selectGov('municipalities','وزارة البلديات',this)"><span class="sb-name">وزارة البلديات</span><span class="sb-sub">وزارة البلديات والإسكان</span></button>
+          <button class="sub-btn" onclick="selectGov('modon','مدن',this)"><span class="sb-name">مدن</span><span class="sb-sub">الهيئة السعودية للمدن الصناعية</span></button>
+          <button class="sub-btn" onclick="selectGov('monshaat','منشآت',this)"><span class="sb-name">منشآت</span><span class="sb-sub">الهيئة العامة للمنشآت الصغيرة</span></button>
+          <button class="sub-btn" onclick="selectGov('exports','هيئة الصادرات',this)"><span class="sb-name">هيئة الصادرات</span><span class="sb-sub">هيئة تنمية الصادرات السعودية</span></button>
+          <button class="sub-btn" onclick="selectGov('tourism','صندوق السياحة',this)"><span class="sb-name">صندوق السياحة</span><span class="sb-sub">صندوق التنمية السياحي</span></button>
+          <button class="sub-btn" onclick="selectGov('sdb','بنك التنمية الاجتماعي',this)"><span class="sb-name">بنك التنمية الاجتماعي</span><span class="sb-sub">SDB</span></button>
+        </div>
+      </div>
+
+      <div class="entity-card prv-style" onclick="selectCat('private','القطاع الخاص',this)">
+        <div class="stripe"></div>
+        <div class="e-type">خاص</div>
+        <div class="e-name">القطاع الخاص</div>
+        <span class="e-badge" id="badge-private">11 برنامج</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+      <div class="entity-card hlth-style" onclick="selectCat('health','القطاع الصحي',this)">
+        <div class="stripe"></div>
+        <div class="e-type">صحي</div>
+        <div class="e-name">القطاع الصحي</div>
+        <span class="e-badge" id="badge-health">6 برامج</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+      <div class="entity-card glb-style" onclick="selectCat('global','البرامج العالمية',this)">
+        <div class="stripe"></div>
+        <div class="e-type">دولي</div>
+        <div class="e-name">البرامج العالمية</div>
+        <span class="e-badge" id="badge-global">6 برامج</span>
+        <span class="e-arrow">←</span>
+      </div>
+
+    </div><!-- /entities-grid -->
+
+    <!-- ═══ PROGRAMS OUTPUT ═══ -->
+    <div class="prog-wrap" id="prog-wrap">
+      <div class="prog-hdr">
+        <div class="prog-hdr-title" id="prog-title"></div>
+        <div class="prog-hdr-count" id="prog-count"></div>
+      </div>
+      <div class="det" id="det">
+        <div class="det-title">
+          <span id="d-name"></span>
+          <a class="det-link" id="d-link" href="#" target="_blank" rel="noopener">زيارة الموقع ↗</a>
+        </div>
+        <div class="dgrid">
+          <div class="di"><label>الجهة</label><p id="d-src"></p></div>
+          <div class="di"><label>الفئة المستهدفة</label><p id="d-tgt"></p></div>
+          <div class="di"><label>الدعم المالي</label><p id="d-fin"></p></div>
+          <div class="di"><label>الخدمات المقدمة</label><p id="d-svc"></p></div>
+        </div>
+        <button class="cbtn" onclick="closeDet()">إغلاق</button>
+      </div>
+      <div class="pgrid" id="progs"></div>
+    </div>
+
+  </div><!-- /tab-programs -->
+
+</div><!-- /main -->
+
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   KACST Dashboard — Dynamic Data Engine v6
+   Sheet: https://docs.google.com/spreadsheets/d/1sbkKdxjermeBRNc0LtyUGf_cgOQVjhexO8iG5FW0ER4
+   ═══════════════════════════════════════════════════════════════
+   Tabs used:
+     kacst_site_config  →  section=about  (نبذة / أهداف / مؤشرات)
+                           section=header (header fields)
+     Programs           →  program cards
+     settings           →  design / theme variables
+   ═══════════════════════════════════════════════════════════════ */
+
+// ─── CONFIG ──────────────────────────────────────────────────
+const SHEET_ID = '1sbkKdxjermeBRNc0LtyUGf_cgOQVjhexO8iG5FW0ER4';
+const TAB = {
+  config:   'kacst_site_config',
+  programs: 'Programs',
+  settings: 'settings'
+};
+
+// ─── STATE ───────────────────────────────────────────────────
+let PROGRAMS = [];
+let govOpen  = false;
+
+// ─── HTML ESCAPE HELPER ──────────────────────────────────────
+function esc(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ─── SHEET URL BUILDER ───────────────────────────────────────
+function sheetUrl(tabName) {
+  return 'https://docs.google.com/spreadsheets/d/'
+    + SHEET_ID
+    + '/gviz/tq?tqx=out:json&sheet='
+    + encodeURIComponent(tabName)
+    + '&t=' + Date.now();
+}
+
+// ─── FETCH ONE SHEET TAB → array of plain objects ────────────
+async function fetchSheet(tabName) {
+  try {
+    const res = await fetch(sheetUrl(tabName), { cache: 'no-store' });
+    if (!res.ok) {
+      console.warn('[KACST] Tab "' + tabName + '" HTTP ' + res.status);
+      return null;
+    }
+    const raw = await res.text();
+    const first = raw.indexOf('{');
+    const last  = raw.lastIndexOf('}');
+    if (first === -1 || last <= first) {
+      console.warn('[KACST] Tab "' + tabName + '" — no JSON braces found');
+      return null;
+    }
+    const data = JSON.parse(raw.substring(first, last + 1));
+    if (!data.table) {
+      console.warn('[KACST] Tab "' + tabName + '" — no .table');
+      return null;
+    }
+    if (!data.table.rows || data.table.rows.length === 0) {
+      console.warn('[KACST] Tab "' + tabName + '" — 0 rows (check tab name & public sharing)');
+      return null;
+    }
+    const cols = (data.table.cols || []).map(function(c) {
+      return (c.label || c.id || '').toLowerCase().trim();
+    });
+    console.log('[KACST] "' + tabName + '" → ' + data.table.rows.length
+      + ' rows | cols: [' + cols.join(', ') + ']');
+    return data.table.rows
+      .filter(function(row) {
+        return row.c && row.c.some(function(cell) {
+          return cell && cell.v !== null && cell.v !== '';
+        });
+      })
+      .map(function(row) {
+        var obj = {};
+        (row.c || []).forEach(function(cell, i) {
+          var k = cols[i];
+          if (k) obj[k] = (cell && cell.v !== null) ? cell.v : '';
+        });
+        return obj;
+      });
+  } catch (e) {
+    console.error('[KACST] fetchSheet("' + tabName + '") error:', e);
+    return null;
+  }
+}
+
+// ─── fetchData() — fetch all tabs in parallel ────────────────
+async function fetchData() {
+  console.log('[KACST] fetchData() — fetching all tabs…');
+  var results = await Promise.all([
+    fetchSheet(TAB.config),
+    fetchSheet(TAB.programs),
+    fetchSheet(TAB.settings),
+  ]);
+  return {
+    configRows:   results[0],
+    programRows:  results[1],
+    settingsRows: results[2],
+  };
+}
+
+// ─── applyTheme() — settings tab: key | value ───────────────
+/*  Supported keys: primary_color, secondary_color, accent_color,
+    background_color, text_color, card_radius, font_family,
+    shadow, logo_url                                             */
+function applyTheme(rows) {
+  if (!rows || !rows.length) return;
+  var cfg = {};
+  rows.forEach(function(r) {
+    var k = r.key   || r['المفتاح'] || r['key']   || '';
+    var v = r.value || r['القيمة']  || r['value'] || '';
+    if (k) cfg[String(k).toLowerCase().trim()] = String(v);
+  });
+  var root = document.documentElement;
+  function setVar(cssVar, keys) {
+    for (var i = 0; i < keys.length; i++) {
+      var v = cfg[keys[i]];
+      if (v) { root.style.setProperty(cssVar, v); return; }
+    }
+  }
+  setVar('--primary',     ['primary_color',    'primary']);
+  setVar('--secondary',   ['secondary_color',  'secondary']);
+  setVar('--accent',      ['accent_color',     'accent']);
+  setVar('--bg',          ['background_color', 'bg_color', 'background']);
+  setVar('--text',        ['text_color',       'text']);
+  setVar('--card-radius', ['card_radius',      'border_radius', 'radius']);
+  setVar('--font',        ['font_family',      'font']);
+  setVar('--shadow',      ['shadow',           'box_shadow']);
+  if (cfg.logo_url) {
+    var img = document.getElementById('kacst-logo');
+    if (img) img.src = cfg.logo_url;
+  }
+}
+
+// ─── renderAbout() — kacst_site_config tab ───────────────────
+/*
+  Expected columns (flexible — any of these patterns):
+  Pattern A:  section | key | value | value2
+  Pattern B:  section | field | value | value2
+  Pattern C:  section | نبذة | الأهداف | مؤشرات الأداء  (flat cols)
+
+  Sections:
+    about  → نبذة, obj_1…obj_6, kpi_N_label/current/target
+    header → header_title, header_dept, header_email, header_update
+*/
+function renderAbout(rows) {
+  if (!rows || !rows.length) return;
+
+  // ── Normalize: build two keyed maps — about & header ────────
+  var about  = {};   // key → { value, value2 }
+  var header = {};   // key → value
+
+  rows.forEach(function(r) {
+    // Detect section
+    var section = String(
+      r.section || r['القسم'] || r['section'] || ''
+    ).toLowerCase().trim();
+
+    // Detect key/field name
+    var key = String(
+      r.key || r.field || r['المفتاح'] || r['الحقل'] || r['key'] || r['field'] || ''
+    ).toLowerCase().trim();
+
+    // Detect value
+    var val  = String(r.value  || r['القيمة'] || r['value']  || '').trim();
+    var val2 = String(r.value2 || r['value2'] || r['القيمة2'] || '').trim();
+
+    if (!key && !section) return;  // skip fully empty rows
+
+    // If section is missing but key looks like a header_ key → treat as header
+    if (!section && key.startsWith('header')) section = 'header';
+    // Default to about if no section column
+    if (!section) section = 'about';
+
+    if (section === 'header') {
+      header[key] = val;
+    } else {
+      about[key] = { value: val, value2: val2 };
+    }
+  });
+
+  function v(k)  { return about[k] ? about[k].value  : ''; }
+  function v2(k) { return about[k] ? about[k].value2 : ''; }
+
+  // ── نبذة ─────────────────────────────────────────────────────
+  var nabtha = v('نبذة') || v('nabtha') || v('description') || v('about') || v('نبذه');
+  if (nabtha) {
+    var el = document.getElementById('nabtha-box');
+    if (el) {
+      var paras = nabtha.split(/\n+/).filter(Boolean);
+      el.innerHTML = paras.length
+        ? paras.map(function(p) { return '<p>' + esc(p) + '</p>'; }).join('')
+        : '<p>' + esc(nabtha) + '</p>';
+    }
+  }
+
+  // ── أهداف ──────────────────────────────────────────────────
+  var objGrid = document.getElementById('objectives-grid');
+  if (objGrid) {
+    var objCss  = ['c1','c2','c3','c4','c5','c6'];
+    var objRows = [];
+    for (var i = 1; i <= 6; i++) {
+      var t = v('obj_' + i)       || v('objective_' + i)
+           || v('هدف_' + i)       || v('هدف ' + i)
+           || v('goal_' + i)      || v('الهدف_' + i);
+      if (t) objRows.push({ n: i, text: t, css: objCss[i - 1] });
+    }
+    // Fallback: look for rows whose key starts with "obj" or "هدف"
+    if (!objRows.length) {
+      var orderedObj = Object.keys(about)
+        .filter(function(k) { return /^(obj|هدف|objective|goal)/.test(k); })
+        .sort();
+      orderedObj.forEach(function(k, idx) {
+        if (idx < 6) objRows.push({ n: idx + 1, text: about[k].value, css: objCss[idx] });
+      });
+    }
+    if (objRows.length) {
+      objGrid.innerHTML = objRows.map(function(o) {
+        return '<div class="obj-card">'
+          + '<div class="obj-num ' + o.css + '">' + o.n + '</div>'
+          + '<div class="obj-text">' + esc(o.text) + '</div></div>';
+      }).join('');
+    }
+  }
+
+  // ── مؤشرات الأداء ─────────────────────────────────────────
+  var kpiWrap  = document.getElementById('kpi-indicators');
+  if (kpiWrap) {
+    var kpiBadge = ['b1','b2','b3','b4'];
+    var kpiTgt   = ['target-b1','target-b2','target-b3','target-b4'];
+    var kpiRows  = [];
+    for (var ki = 1; ki <= 4; ki++) {
+      var kpiLbl = v('kpi_' + ki + '_label')   || v('ind_' + ki + '_label')
+                || v('مؤشر_' + ki)             || v('kpi' + ki + '_label');
+      var kpiCur = v('kpi_' + ki + '_current') || v('ind_' + ki + '_current')
+                || v('kpi' + ki + '_current');
+      var kpiTgtVal = v('kpi_' + ki + '_target')  || v('ind_' + ki + '_target')
+                   || v2('kpi_' + ki + '_current') || v('kpi' + ki + '_target');
+      if (kpiLbl) kpiRows.push({
+        n: ki, lbl: kpiLbl,
+        cur: kpiCur || '—',
+        tgt: kpiTgtVal || '—'
+      });
+    }
+    if (kpiRows.length) {
+      kpiWrap.innerHTML = kpiRows.map(function(k) {
+        var pad = k.n < 10 ? '0' + k.n : String(k.n);
+        return '<div class="kpi-card">'
+          + '<div class="kpi-badge ' + kpiBadge[k.n - 1] + '">' + pad + '</div>'
+          + '<div class="kpi-lbl">' + esc(k.lbl) + '</div>'
+          + '<div class="kpi-vals">'
+          + '<div class="val-box current"><div class="vn">' + esc(k.cur) + '</div><div class="vl">الحالي</div></div>'
+          + '<div class="val-box ' + kpiTgt[k.n - 1] + '"><div class="vn">' + esc(k.tgt) + '</div><div class="vl">المستهدف</div></div>'
+          + '</div></div>';
+      }).join('');
+    }
+  }
+
+  // ── Header fields ────────────────────────────────────────────
+  var ht = header['header_title'] || header['title'] || header['initiative_name'];
+  if (ht) { var hte = document.getElementById('h-initiative'); if (hte) hte.textContent = ht; }
+
+  var hd = header['header_dept'] || header['dept'] || header['department'];
+  var he = header['header_email']|| header['email'];
+  if (hd) {
+    var hde = document.getElementById('h-dept');
+    if (hde) hde.innerHTML = esc(hd) + (he
+      ? ' · <a href="mailto:' + esc(he) + '" style="color:rgba(255,255,255,0.6);text-decoration:none;">' + esc(he) + '</a>'
+      : '');
+  }
+
+  var hu = header['header_update'] || header['last_update'] || header['update_date'];
+  if (hu) { var hme = document.getElementById('h-meta'); if (hme) hme.textContent = 'آخر تحديث: ' + hu; }
+}
+
+// ─── renderPrograms() — Programs tab ─────────────────────────
+/*
+  Expected columns:
+    id, cat, cat_label, src, name, financial_support,
+    target, services, url, hasFinancial, isNew, isClosed
+*/
+function parsePrograms(rows) {
+  function toBool(x) {
+    if (x === true  || x === 1)    return true;
+    if (x === false || x === 0)    return false;
+    var s = String(x).trim().toLowerCase();
+    return s === 'true' || s === '1' || s === 'yes' || s === 'نعم';
+  }
+  return rows.map(function(r) {
+    return {
+      id:  +(r.id || 0),
+      cat: String(r.cat  || r.category         || r['الفئة']          || '').trim(),
+      src: String(r.src  || r.source || r.entity|| r['الجهة']         || '').trim(),
+      n:   String(r.name || r.n || r.program_name || r['اسم البرنامج']|| r['الاسم'] || '').trim(),
+      fin: String(r.financial_support || r.fin  || r.funding || r['الدعم المالي']    || '').trim(),
+      t:   String(r.target || r.t || r.target_audience || r['الفئة المستهدفة']       || '').trim(),
+      svc: String(r.services || r.svc || r.service || r['الخدمات']    || '').trim(),
+      url: String(r.url  || r.link || r.website || r['الرابط']        || '#').trim(),
+      f:   toBool(r.hasfinancial || r.has_financial || r.f),
+      nw:  toBool(r.isnew        || r.is_new        || r.nw),
+      cl:  toBool(r.isclosed     || r.is_closed     || r.cl),
+    };
+  }).filter(function(p) { return p.id > 0 && p.cat; });
+}
+
+function renderPrograms(rows) {
+  if (!rows || !rows.length) return;
+  var parsed = parsePrograms(rows);
+  if (!parsed.length) {
+    console.warn('[KACST] Programs tab: 0 valid rows after parsing');
+    return;
+  }
+  PROGRAMS = parsed;
+  updateBadges();
+  // Re-render the currently visible category if one is open
+  var wrap = document.getElementById('prog-wrap');
+  if (wrap && wrap.style.display === 'block') {
+    var activeSub = document.querySelector('.sub-btn.active');
+    var activeEnt = document.querySelector('.entity-card.active:not(#gov-card)');
+    if (activeSub) {
+      var m1 = activeSub.getAttribute('onclick').match(/'([^']+)'/);
+      if (m1) showProg(m1[1], activeSub.querySelector('.sb-name').textContent);
+    } else if (activeEnt) {
+      var m2 = activeEnt.getAttribute('onclick').match(/'([^']+)'/);
+      if (m2) showProg(m2[1], activeEnt.querySelector('.e-name').textContent);
+    }
+  }
+}
+
+// ─── UPDATE STATS KPI ROW ────────────────────────────────────
+function updateStats() {
+  // Derive stats dynamically from loaded programs
+  var govCats = ['ntdp','industry','smebank','municipalities',
+                 'modon','monshaat','exports','tourism','sdb'];
+  var totalPrograms = PROGRAMS.length;
+  var entities = new Set(PROGRAMS.map(function(p) { return p.src; })).size;
+  var govPrograms = PROGRAMS.filter(function(p) {
+    return govCats.indexOf(p.cat) !== -1;
+  }).length;
+  var financialPrograms = PROGRAMS.filter(function(p) { return p.f; }).length;
+
+  // Only update if still showing defaults (don't override sheet-set values)
+  var n1 = document.getElementById('stat-n1');
+  var n2 = document.getElementById('stat-n2');
+  if (n1 && n1.textContent === '22') n1.textContent = entities || '22';
+  if (n2 && n2.textContent === '80+') n2.textContent = (totalPrograms > 0 ? totalPrograms + '+' : '80+');
+}
+
+// ─── UPDATE BADGE COUNTS ─────────────────────────────────────
+function updateBadges() {
+  var catMap = {
+    universities: 'badge-universities',
+    nonprofit:    'badge-nonprofit',
+    private:      'badge-private',
+    health:       'badge-health',
+    global:       'badge-global',
+  };
+  Object.keys(catMap).forEach(function(cat) {
+    var count = PROGRAMS.filter(function(p) { return p.cat === cat; }).length;
+    var el = document.getElementById(catMap[cat]);
+    if (el) el.textContent = count + ' برامج';
+  });
+  var govCats = ['ntdp','industry','smebank','municipalities','modon','monshaat','exports','tourism','sdb'];
+  var govCount = new Set(
+    PROGRAMS.filter(function(p) { return govCats.indexOf(p.cat) !== -1; }).map(function(p) { return p.cat; })
+  ).size;
+  var govBadge = document.getElementById('gov-badge');
+  if (govBadge) govBadge.textContent = govCount + ' جهات';
+}
+
+// ─── STATUS BAR ──────────────────────────────────────────────
+function setStatus(type, msg) {
+  var dot = document.getElementById('status-dot');
+  var txt = document.getElementById('status-msg');
+  if (dot) { dot.className = 'status-dot'; if (type) dot.classList.add(type); }
+  if (txt) txt.textContent = msg;
+}
+
+// ─── MAIN REFRESH (تحديث البيانات) ──────────────────────────
+async function refreshAll() {
+  var btn  = document.getElementById('btn-update');
+  var icon = document.getElementById('btn-icon');
+  var text = document.getElementById('btn-text');
+  if (btn)  btn.classList.add('loading');
+  if (icon) icon.innerHTML = '<span class="spin">↻</span>';
+  if (text) text.textContent = 'جارٍ التحديث…';
+  setStatus('', 'جارٍ الاتصال بـ Google Sheets…');
+
+  try {
+    var d = await fetchData();
+    var live = 0;
+
+    if (d.settingsRows && d.settingsRows.length) { applyTheme(d.settingsRows);       live++; }
+    if (d.configRows   && d.configRows.length)   { renderAbout(d.configRows);        live++; }
+    if (d.programRows  && d.programRows.length)  { renderPrograms(d.programRows);    live++; }
+
+    updateStats();
+
+    var now = new Date().toLocaleString('ar-SA', { hour:'2-digit', minute:'2-digit' });
+    if (live > 0) {
+      setStatus('live', 'بيانات حية — ' + live + ' من 3 جداول — آخر تحديث: ' + now);
+      var hm = document.getElementById('h-meta');
+      if (hm && (hm.textContent.indexOf('جارٍ') !== -1 || hm.textContent === '')) {
+        hm.textContent = 'آخر تحديث: ' + new Date().toLocaleDateString('ar-SA');
+      }
+    } else {
+      setStatus('error', 'تعذّر الاتصال — تأكد من مشاركة الجدول للعموم');
+    }
+  } catch (e) {
+    console.error('[KACST] Refresh error:', e);
+    setStatus('error', 'خطأ أثناء التحديث — ' + e.message);
+  } finally {
+    if (btn)  btn.classList.remove('loading');
+    if (icon) icon.textContent = '↻';
+    if (text) text.textContent = 'تحديث البيانات';
+  }
+}
+
+// ─── TABS ────────────────────────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b)   { b.classList.remove('active'); });
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('tab-btn-' + tab).classList.add('active');
+}
+
+// ─── ENTITY NAVIGATION ───────────────────────────────────────
+function toggleGov(el) {
+  govOpen = !govOpen;
+  document.getElementById('gov-sub').classList.toggle('show', govOpen);
+  el.classList.toggle('gov-open', govOpen);
+  if (!govOpen) {
+    document.querySelectorAll('.sub-btn').forEach(function(b) { b.classList.remove('active'); });
+    hideProg();
+  }
+}
+
+function selectGov(cat, label, btn) {
+  document.querySelectorAll('.sub-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  showProg(cat, label);
+}
+
+function selectCat(cat, label, el) {
+  govOpen = false;
+  document.getElementById('gov-sub').classList.remove('show');
+  document.getElementById('gov-card').classList.remove('gov-open');
+  document.querySelectorAll('.sub-btn').forEach(function(b)     { b.classList.remove('active'); });
+  document.querySelectorAll('.entity-card').forEach(function(c) { c.classList.remove('active'); });
+  el.classList.add('active');
+  showProg(cat, label);
+}
+
+function showProg(cat, label) {
+  var list = PROGRAMS.filter(function(p) { return p.cat === cat; });
+  closeDet();
+  var wrap = document.getElementById('prog-wrap');
+  wrap.style.display = 'block';
+  document.getElementById('prog-title').textContent = 'برامج ' + label;
+  document.getElementById('prog-count').textContent = list.length + ' برنامج';
+  document.getElementById('progs').innerHTML = list.map(function(p) {
+    var cls = p.cl ? ' cl' : p.nw ? ' nw' : '';
+    return '<div class="pc' + cls + '">'
+      + '<div class="pc-stripe"></div>'
+      + '<div class="pc-top">'
+      + '<div class="psrc">' + esc(p.src) + '</div>'
+      + '<a class="plink" href="' + esc(p.url) + '" target="_blank" rel="noopener">زيارة الموقع ↗</a>'
+      + '</div>'
+      + '<div class="pname" onclick="showDet(' + p.id + ')">' + esc(p.n) + '</div>'
+      + '<div class="ptags">'
+      + (p.cl ? '<span class="tag tc">مغلق</span>' : '')
+      + (p.nw ? '<span class="tag tnw">جديد</span>' : '')
+      + (p.f  ? '<span class="tag tf">دعم مالي</span>' : '<span class="tag tn">خدمات</span>')
+      + '</div></div>';
+  }).join('');
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function hideProg() {
+  document.getElementById('prog-wrap').style.display = 'none';
+  closeDet();
+}
+
+function showDet(id) {
+  var p = PROGRAMS.find(function(x) { return x.id === id; });
+  if (!p) return;
+  document.getElementById('d-name').textContent = p.n + (p.cl ? ' — مغلق حالياً' : '');
+  var dl = document.getElementById('d-link');
+  dl.href = (/^https?:\/\//i.test(p.url)) ? p.url : '#';
+  document.getElementById('d-src').textContent = p.src;
+  document.getElementById('d-tgt').textContent = p.t;
+  document.getElementById('d-fin').textContent = p.fin;
+  document.getElementById('d-svc').textContent = p.svc;
+  document.getElementById('det').classList.add('show');
+  document.getElementById('det').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeDet() {
+  var det = document.getElementById('det');
+  if (det) det.classList.remove('show');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  refreshAll();
+});
+</script>
+</body>
+</html>
